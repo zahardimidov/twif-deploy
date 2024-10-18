@@ -1,0 +1,11 @@
+node_modules/
+__pycache__/
+venv/
+database.db
+test.py
+.env/
+
+*.json
+*.png
+test.html
+test.js

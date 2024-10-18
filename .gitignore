@@ -1,0 +1,16 @@
+twif-react-app/
+.env/
+.venv/
+env/
+venv/
+__pycache__/
+
+#database.db
+test.py
+.env/
+
+*.json
+*.png
+
+test.js
+backend/.git
