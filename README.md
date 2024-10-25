@@ -5,7 +5,7 @@ https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
 
 Setup nginx on your server
-https://medium.com/@deltarfd/how-to-set-up-nginx-on-ubuntu-server-fc392c88fb59
+https://medium.com/@deltarfd/how-to-set-upnginx-on-ubuntu-server-fc392c88fb59
 
 
 <code>
@@ -52,6 +52,11 @@ WantedBy=multi-user.target
 
 sudo systemctl daemon-reload
 
-sudo systemctl start vehiclebot.service
+sudo systemctl start twif.service
 
-sudo systemctl status vehiclebot.service
+sudo systemctl status twif.service
+
+sudo systemctl enable twif.service
+
+
+
