@@ -68,12 +68,39 @@ async def process_tasks():
 
             await send_message_to_users(users, message)
         else:
-            await asyncio.sleep(1)  # Ждем 1 секунду перед следующей проверкой
+            await asyncio.sleep(3)  # Ждем 1 секунду перед следующей проверкой
 
+async def check_users_requirements():
+    while True:
+        try:
+            async with ClientSession() as session:
+                response = await session.get(BACKEND_HOST + f'/users/all', ssl=sslcontext)
+                users = (await response.json())['users']
+
+                seconds_per_hour = 3600 /360
+                sleep = seconds_per_hour / len(users)
+
+                for user_id in users:
+                    response = await session.get(BACKEND_HOST + f'/party/get_user_party?user_id={user_id}', ssl=sslcontext)
+
+                    if response.status == 200:
+                        party = await response.json()
+
+                        res = await session.get(BACKEND_HOST + f'/party/check_user_party_requirements?user_id={user_id}&party_id={party["id"]}', ssl=sslcontext)
+
+                        if res.status != 200:
+                            print(await res.json())
+                    
+                    await asyncio.sleep(sleep)
+        except Exception as e:
+            print(e)
 
 def run_bot():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
+
+    loop.create_task(check_users_requirements())
+
     loop.run_until_complete(process_tasks())
 
 

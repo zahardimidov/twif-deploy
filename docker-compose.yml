@@ -64,11 +64,12 @@ services:
       - REDIS_HOST=redis
       - BOT_TOKEN=7396897324:AAHzNa_ncI4sf0hkg8M0txRt9KWZSnXFqC0
       - PYTHONUNBUFFERED=1
-      - BACKEND_HOST=https://6adc-178-47-140-82.ngrok-free.app
+      - BACKEND_HOST=https://playcloud.pro
     networks:
       - dev
     depends_on:
       - redis
+      - backend
     restart: always
     working_dir: /background
 volumes:
